@@ -13,12 +13,6 @@ public class Problema {
         this.estadoInicial = estadoInicial;
         this.estadoFinal = estadoFinal;
         this.mapaRomenia = new HashMap<>();
-
-        // Map<String, Integer> aradConexoes = new HashMap<>();
-        // aradConexoes.put("Sibiu", 140);
-        // aradConexoes.put("Zerind", 75);
-        // aradConexoes.put("Timisoara", 118);
-        // mapaRomenia.put("Arad", aradConexoes);
         
         mapaRomenia.put("Arad", Map.of("Sibiu", 140, "Zerind", 75, "Timisoara", 118));
         mapaRomenia.put("Zerind", Map.of("Arad", 75, "Oradea", 71));

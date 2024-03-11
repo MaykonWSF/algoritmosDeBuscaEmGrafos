@@ -20,7 +20,7 @@ public class Busca {
         List<No> borda = new ArrayList<>();
         borda.add(this.estado);
 
-        //Debug
+        // Debug
         List<String> explorados = this.explorados;
         List<String> expandidos = this.expandidos;
         expandidos.add(this.estado.getEstado());
@@ -31,7 +31,7 @@ public class Busca {
             //
             expandidos.remove(0);
             //
-            
+
             this.explorados.add(no.getEstado());
 
             if (this.problema.objetivo(no.getEstado())) {
@@ -39,7 +39,7 @@ public class Busca {
             }
 
             for (No filho : no.explorar(this.problema)) {
-                if (!this.explorados.contains(filho.getEstado()) && !borda.contains(filho)) {
+                if (!this.explorados.contains(filho.getEstado()) && !contemEstado(borda, filho.getEstado())) {
                     borda.add(filho);
                     this.expandidos.add(filho.getEstado());
                 }
@@ -47,5 +47,14 @@ public class Busca {
         }
 
         return null;
+    }
+
+    private boolean contemEstado(List<No> borda, String estado) {
+        for (No no : borda) {
+            if (no.getEstado().equals(estado)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
