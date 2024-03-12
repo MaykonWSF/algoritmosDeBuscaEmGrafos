@@ -15,14 +15,14 @@ public class No {
         this.custo = custo;
     }
 
-    // Retorna o nó filho dado uma ação
+    //Retorna o nó filho dado uma ação
     public No noFilho(Problema problema, String acao) {
         String proximoEstado = problema.transicao(this.estado, acao);
         int novoCusto = this.custo + problema.custo(this.estado, acao, proximoEstado);
         return new No(proximoEstado, this, acao, novoCusto);
     }
 
-    // Retorna todos os nós filhos possíveis a partir deste nó
+    //Retorna todos os nós filhos possíveis a partir deste nó
     public List<No> explorar(Problema problema) {
         List<No> nos = new ArrayList<>();
         for (String acao : problema.acoes(this.estado)) {
@@ -31,7 +31,7 @@ public class No {
         return nos;
     }
 
-    // Retorna o caminho do estado inicial até este nó
+    //Retorna o caminho do estado inicial até este nó
     public List<No> caminho() {
         List<No> caminho = new ArrayList<>();
         No noAtual = this;
@@ -42,7 +42,7 @@ public class No {
         return caminho;
     }
 
-    // Retorna uma lista de ações que levam do estado inicial até este nó
+    //Retorna uma lista de ações que levam do estado inicial até este nó
     public List<String> solucao() {
         List<String> acoes = new ArrayList<>();
         List<No> caminho = caminho();

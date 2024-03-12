@@ -14,6 +14,7 @@ public class Problema {
         this.estadoFinal = estadoFinal;
         this.mapaRomenia = new HashMap<>();
         
+        // Dicionário com cidades da Romênia e seus pesos em relação umas às outras
         mapaRomenia.put("Arad", Map.of("Sibiu", 140, "Zerind", 75, "Timisoara", 118));
         mapaRomenia.put("Zerind", Map.of("Arad", 75, "Oradea", 71));
         mapaRomenia.put("Oradea", Map.of("Zerind", 71, "Sibiu", 151));
@@ -36,11 +37,13 @@ public class Problema {
         mapaRomenia.put("Neamt", Map.of("Iasi", 87));
     }
 
+    //Ações possíveis a partir de onde se está
     public List<String> acoes(String estado) {
         Map<String, Integer> conexoes = this.mapaRomenia.get(estado);
         return new ArrayList<>(conexoes.keySet());
     }
 
+    //Transição de um estado para outro
     public String transicao(String estado, String acao) {
         List<String> acoes = this.acoes(estado);
         if (acoes.contains(acao)) {
@@ -49,14 +52,17 @@ public class Problema {
         return null;
     }
 
+    //Verifica se o estado em que se está é onde se deseja chegar
     public boolean objetivo(String estado) {
         return estado.equals(this.estadoFinal);
     }
 
+    //Custo de ir de um estado para outro (todos são um)
     public int custo(String estado1, String acao, String estado2) {
         return this.mapaRomenia.get(estado1).get(estado2);
     }
 
+    //Getters e Setters
     public Map<String, Map<String, Integer>> getMapaRomenia() {
         return mapaRomenia;
     }
