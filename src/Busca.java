@@ -15,7 +15,7 @@ public class Busca {
     }
 
     //Busca em largura (sem pesos)
-    public No buscaEmLargura() {
+    public List<String> buscaEmLargura() {
         List<No> borda = new ArrayList<>();
         borda.add(this.estado);
 
@@ -24,7 +24,8 @@ public class Busca {
             this.explorados.add(no.getEstado());
 
             if (this.problema.objetivo(no.getEstado())) {
-                return no;
+                no.solucao(explorados);
+                return explorados;
             }
 
             for (No filho : no.explorar(this.problema)) {
@@ -39,17 +40,17 @@ public class Busca {
     }
 
     //Busca em profundidade (sem pesos)
-    public No buscaEmProfundidade() {
+    public List<String> buscaEmProfundidade() {
         List<No> borda = new ArrayList<>();
         borda.add(this.estado);
 
         while (!borda.isEmpty()) {
             No no = borda.remove(borda.size() - 1);
-
             this.explorados.add(no.getEstado());
 
             if (this.problema.objetivo(no.getEstado())) {
-                return no;
+                no.solucao(explorados);
+                return explorados;
             }
 
             for (No filho : no.explorar(this.problema)) {

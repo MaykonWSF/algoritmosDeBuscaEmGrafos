@@ -43,11 +43,11 @@ public class No {
     }
 
     //Retorna uma lista de ações que levam do estado inicial até este nó
-    public List<String> solucao() {
+    public List<String> solucao(List<String> explorados) {
         List<String> acoes = new ArrayList<>();
-        List<No> caminho = caminho();
+        List<String> caminho = explorados;
         for (int i = 1; i < caminho.size(); i++) {
-            acoes.add(caminho.get(i).acao);
+            acoes.add(caminho.get(i));
         }
         return acoes;
     }
