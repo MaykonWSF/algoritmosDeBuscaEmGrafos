@@ -84,4 +84,14 @@ public class No {
     public void setCusto(int custo) {
         this.custo = custo;
     }
+
+    public int getProfundidade() {
+        int profundidade = 0;
+        No noAtual = this;
+        while (noAtual != null && noAtual.pai != null) {
+            profundidade++;
+            noAtual = noAtual.pai;
+        }
+        return profundidade;
+    }
 }

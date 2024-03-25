@@ -64,6 +64,33 @@ public class Busca {
         return null;
     }
 
+    //Busca em profundidade limitada (sem pesos)
+    public List<String> buscaEmProfundidadeLimitada(int limite) {
+        List<No> borda = new ArrayList<>();
+        borda.add(this.estado);
+
+        while (!borda.isEmpty()) {
+            No no = borda.remove(borda.size() - 1);
+            this.explorados.add(no.getEstado());
+
+            if (this.problema.objetivo(no.getEstado())) {
+                no.solucao(explorados);
+                return explorados;
+            }
+
+            if (no.getProfundidade() < limite) {
+                for (No filho : no.explorar(this.problema)) {
+                    if (!this.explorados.contains(filho.getEstado()) && !contemEstado(borda, filho.getEstado())) {
+                        borda.add(filho);
+                        this.expandidos.add(filho.getEstado());
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
     //Analisa se a borda já contém um estado
     private boolean contemEstado(List<No> borda, String estado) {
         for (No no : borda) {
