@@ -14,7 +14,7 @@ public class Busca {
         this.expandidos = new ArrayList<>();
     }
 
-    //Busca em largura (sem pesos)
+    //Busca em largura
     public List<String> buscaEmLargura() {
         List<No> borda = new ArrayList<>();
         borda.add(this.estado);
@@ -39,7 +39,7 @@ public class Busca {
         return null;
     }
 
-    //Busca em profundidade (sem pesos)
+    //Busca em profundidade
     public List<String> buscaEmProfundidade() {
         List<No> borda = new ArrayList<>();
         borda.add(this.estado);
@@ -64,7 +64,7 @@ public class Busca {
         return null;
     }
 
-    //Busca em profundidade limitada (sem pesos)
+    //Busca em profundidade limitada
     public List<String> buscaEmProfundidadeLimitada(int limite) {
         List<No> borda = new ArrayList<>();
         borda.add(this.estado);
@@ -85,6 +85,20 @@ public class Busca {
                         this.expandidos.add(filho.getEstado());
                     }
                 }
+            }
+        }
+
+        return null;
+    }
+
+    //Busca em profundidade iterativa
+    public List<String> buscaEmProfundidadeIterativa() {
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            this.explorados.clear();
+            this.expandidos.clear();
+            List<String> resultado = this.buscaEmProfundidadeLimitada(i);
+            if (resultado != null) {
+                return resultado;
             }
         }
 
