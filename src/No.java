@@ -51,6 +51,22 @@ public class No {
         }
         return acoes;
     }
+    
+    //Retorna a profundidade do nó
+    public int getProfundidade() {
+        int profundidade = 0;
+        No noAtual = this;
+        while (noAtual != null && noAtual.pai != null) {
+            profundidade++;
+            noAtual = noAtual.pai;
+        }
+        return profundidade;
+    }
+
+    //Retorna a heurística do nó
+    public int getHeuristica(Problema problema) {
+        return problema.heuristica(this.estado);
+    }
 
     // Getters e Setters
     public String getEstado() {
@@ -85,13 +101,4 @@ public class No {
         this.custo = custo;
     }
 
-    public int getProfundidade() {
-        int profundidade = 0;
-        No noAtual = this;
-        while (noAtual != null && noAtual.pai != null) {
-            profundidade++;
-            noAtual = noAtual.pai;
-        }
-        return profundidade;
-    }
 }
