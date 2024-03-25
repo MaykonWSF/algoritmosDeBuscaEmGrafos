@@ -61,6 +61,32 @@ public class Problema {
         return this.mapaRomenia.get(estado1).get(estado2);
     }
 
+    //Heurística de distância em linha reta de uma cidade até Bucareste
+    public int heuristica(String estado) {
+        Map<String, Integer> distancias = new HashMap<>();
+        distancias.put("Arad", 366);
+        distancias.put("Zerind", 374);
+        distancias.put("Oradea", 380);
+        distancias.put("Sibiu", 253);
+        distancias.put("Timisoara", 329);
+        distancias.put("Lugoj", 244);
+        distancias.put("Mehadia", 241);
+        distancias.put("Drobeta", 242);
+        distancias.put("Craiova", 160);
+        distancias.put("Rimnicu Vilcea", 193);
+        distancias.put("Fagaras", 176);
+        distancias.put("Pitesti", 100);
+        distancias.put("Bucharest", 0);
+        distancias.put("Giurgiu", 77);
+        distancias.put("Urziceni", 80);
+        distancias.put("Hirsova", 151);
+        distancias.put("Eforie", 161);
+        distancias.put("Vaslui", 199);
+        distancias.put("Iasi", 226);
+        distancias.put("Neamt", 234);
+        return distancias.get(estado);
+    }
+
     //Getters e Setters
     public Map<String, Map<String, Integer>> getMapaRomenia() {
         return mapaRomenia;
