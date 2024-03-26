@@ -18,8 +18,8 @@ public class No {
     //Retorna o nó filho dado uma ação
     public No noFilho(Problema problema, String acao) {
         String proximoEstado = problema.transicao(this.estado, acao);
-        int novoCusto = this.custo + problema.custo(this.estado, acao, proximoEstado);
-        return new No(proximoEstado, this, acao, novoCusto);
+        int custoFilho = problema.custo(this.estado, acao, proximoEstado);
+        return new No(proximoEstado, this, acao, custoFilho);
     }
 
     //Retorna todos os nós filhos possíveis a partir deste nó
@@ -36,7 +36,7 @@ public class No {
         List<No> caminho = new ArrayList<>();
         No noAtual = this;
         while (noAtual != null) {
-            caminho.add(0, noAtual); // Insere no início da lista
+            caminho.add(0, noAtual);
             noAtual = noAtual.pai;
         }
         return caminho;
@@ -66,6 +66,17 @@ public class No {
     //Retorna a heurística do nó
     public int getHeuristica(Problema problema) {
         return problema.heuristica(this.estado);
+    }
+
+    //Retorna o custo real do nó
+    public int getDistanciaPercorrida() {
+        int custoReal = 0;
+        No noAtual = this;
+        while (noAtual != null) {
+            custoReal += noAtual.custo;
+            noAtual = noAtual.pai;
+        }
+        return custoReal;
     }
 
     // Getters e Setters

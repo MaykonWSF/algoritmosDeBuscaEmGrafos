@@ -159,6 +159,32 @@ public class Busca {
         return null;
     }
 
+    //Busca A*
+    public List<String> buscaAEstrela() {
+        List<No> borda = new ArrayList<>();
+        borda.add(this.estado);
+
+        while (!borda.isEmpty()) {
+            No no = borda.remove(0);
+            this.explorados.add(no.getEstado());
+
+            if (this.problema.objetivo(no.getEstado())) {
+                no.solucao(explorados);
+                return explorados;
+            }
+
+            for (No filho : no.explorar(this.problema)) {
+                if (!contemEstado(borda, filho.getEstado())) {
+                    borda.add(filho);
+                    this.expandidos.add(filho.getEstado());
+                    ordenarBordaPorCustoReal(borda);
+                }
+            }
+        }
+
+        return null;
+    }
+
     //Analisa se a borda já contém um estado
     private boolean contemEstado(List<No> borda, String estado) {
         for (No no : borda) {
@@ -167,6 +193,12 @@ public class Busca {
             }
         }
         return false;
+    }
+
+    //Calcula o custo real de um nó
+    private int custoReal(No no) {
+        int custoReal = no.getDistanciaPercorrida() + no.getHeuristica(this.problema);
+        return custoReal;
     }
 
     //Ordenar a borda pelo custo
@@ -187,6 +219,18 @@ public class Busca {
             if (no1.getHeuristica(this.problema) < no2.getHeuristica(this.problema)) {
                 return -1;
             } else if (no1.getHeuristica(this.problema) > no2.getHeuristica(this.problema)) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+
+    //Ordenar por custo real
+    private void ordenarBordaPorCustoReal(List<No> borda) {
+        borda.sort((No no1, No no2) -> {
+            if (custoReal(no1) < custoReal(no2)) {
+                return -1;
+            } else if (custoReal(no1) > custoReal(no2)) {
                 return 1;
             }
             return 0;

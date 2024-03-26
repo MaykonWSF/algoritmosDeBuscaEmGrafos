@@ -3,6 +3,6 @@ public class App {
         Problema problema1 = new Problema("Arad", "Bucharest");
         Busca busca1 = new Busca(problema1);
 
-        System.out.println(busca1.buscaGulosa());
+        System.out.println(busca1.buscaAEstrela());
     }
 }
