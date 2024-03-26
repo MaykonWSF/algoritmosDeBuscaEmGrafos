@@ -14,7 +14,7 @@ public class Busca {
         this.expandidos = new ArrayList<>();
     }
 
-    //Busca em largura
+    // Busca em largura
     public List<String> buscaEmLargura() {
         List<No> borda = new ArrayList<>();
         borda.add(this.estado);
@@ -39,7 +39,7 @@ public class Busca {
         return null;
     }
 
-    //Busca em profundidade
+    // Busca em profundidade
     public List<String> buscaEmProfundidade() {
         List<No> borda = new ArrayList<>();
         borda.add(this.estado);
@@ -64,7 +64,7 @@ public class Busca {
         return null;
     }
 
-    //Busca em profundidade limitada
+    // Busca em profundidade limitada
     public List<String> buscaEmProfundidadeLimitada(int limite) {
         List<No> borda = new ArrayList<>();
         borda.add(this.estado);
@@ -91,7 +91,7 @@ public class Busca {
         return null;
     }
 
-    //Busca em profundidade iterativa
+    // Busca em profundidade iterativa
     public List<String> buscaEmProfundidadeIterativa() {
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
             this.explorados.clear();
@@ -105,7 +105,7 @@ public class Busca {
         return null;
     }
 
-    //Busca de custo uniforme
+    // Busca de custo uniforme
     public List<String> buscaDeCustoUniforme() {
         List<No> borda = new ArrayList<>();
         borda.add(this.estado);
@@ -132,7 +132,7 @@ public class Busca {
         return null;
     }
 
-    //Busca gulosa
+    // Busca gulosa
     public List<String> buscaGulosa() {
         List<No> borda = new ArrayList<>();
         borda.add(this.estado);
@@ -159,7 +159,7 @@ public class Busca {
         return null;
     }
 
-    //Busca A*
+    // Busca A*
     public List<String> buscaAEstrela() {
         List<No> borda = new ArrayList<>();
         borda.add(this.estado);
@@ -169,23 +169,24 @@ public class Busca {
             this.explorados.add(no.getEstado());
 
             if (this.problema.objetivo(no.getEstado())) {
-                no.solucao(explorados);
-                return explorados;
+                List<String> melhorCaminho = new ArrayList<>();
+                for (No noCaminho : no.caminho()) {
+                    melhorCaminho.add(noCaminho.getEstado());
+                }
+                return melhorCaminho;
             }
 
             for (No filho : no.explorar(this.problema)) {
-                if (!contemEstado(borda, filho.getEstado())) {
-                    borda.add(filho);
-                    this.expandidos.add(filho.getEstado());
-                    ordenarBordaPorCustoReal(borda);
-                }
+                borda.add(filho);
+                this.expandidos.add(filho.getEstado());
+                ordenarBordaPorCustoReal(borda);
             }
         }
 
         return null;
     }
 
-    //Analisa se a borda já contém um estado
+    // Analisa se a borda já contém um estado
     private boolean contemEstado(List<No> borda, String estado) {
         for (No no : borda) {
             if (no.getEstado().equals(estado)) {
@@ -195,13 +196,7 @@ public class Busca {
         return false;
     }
 
-    //Calcula o custo real de um nó
-    private int custoReal(No no) {
-        int custoReal = no.getDistanciaPercorrida() + no.getHeuristica(this.problema);
-        return custoReal;
-    }
-
-    //Ordenar a borda pelo custo
+    // Ordenar a borda pelo custo
     private void ordenarBordaPorCusto(List<No> borda) {
         borda.sort((No no1, No no2) -> {
             if (no1.getCusto() < no2.getCusto()) {
@@ -213,7 +208,7 @@ public class Busca {
         });
     }
 
-    //Ordenar a borda pela heurística
+    // Ordenar a borda pela heurística
     private void ordenarBordaPorHeuristica(List<No> borda) {
         borda.sort((No no1, No no2) -> {
             if (no1.getHeuristica(this.problema) < no2.getHeuristica(this.problema)) {
@@ -225,7 +220,13 @@ public class Busca {
         });
     }
 
-    //Ordenar por custo real
+    // Calcula o custo real de um nó
+    private int custoReal(No no) {
+        int custoReal = no.getDistanciaPercorrida() + no.getHeuristica(this.problema);
+        return custoReal;
+    }
+
+    // Ordenar por custo real
     private void ordenarBordaPorCustoReal(List<No> borda) {
         borda.sort((No no1, No no2) -> {
             if (custoReal(no1) < custoReal(no2)) {
