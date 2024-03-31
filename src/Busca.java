@@ -29,7 +29,7 @@ public class Busca {
             }
 
             for (No filho : no.explorar(this.problema)) {
-                if (!this.explorados.contains(filho.getEstado()) && !contemEstado(borda, filho.getEstado())) {
+                if (!this.explorados.contains(filho.getEstado())) {
                     borda.add(filho);
                     this.expandidos.add(filho.getEstado());
                 }
@@ -54,7 +54,7 @@ public class Busca {
             }
 
             for (No filho : no.explorar(this.problema)) {
-                if (!this.explorados.contains(filho.getEstado()) && !contemEstado(borda, filho.getEstado())) {
+                if (!this.explorados.contains(filho.getEstado())) {
                     borda.add(filho);
                     this.expandidos.add(filho.getEstado());
                 }
@@ -80,7 +80,7 @@ public class Busca {
 
             if (no.getProfundidade() < limite) {
                 for (No filho : no.explorar(this.problema)) {
-                    if (!this.explorados.contains(filho.getEstado()) && !contemEstado(borda, filho.getEstado())) {
+                    if (!this.explorados.contains(filho.getEstado())) {
                         borda.add(filho);
                         this.expandidos.add(filho.getEstado());
                     }
@@ -121,7 +121,7 @@ public class Busca {
             }
 
             for (No filho : no.explorar(this.problema)) {
-                if (!this.explorados.contains(filho.getEstado()) && !contemEstado(borda, filho.getEstado())) {
+                if (!this.explorados.contains(filho.getEstado())) {
                     borda.add(filho);
                     this.expandidos.add(filho.getEstado());
                     ordenarBordaPorCusto(borda);
@@ -148,7 +148,7 @@ public class Busca {
             }
 
             for (No filho : no.explorar(this.problema)) {
-                if (!this.explorados.contains(filho.getEstado()) && !contemEstado(borda, filho.getEstado())) {
+                if (!this.explorados.contains(filho.getEstado())) {
                     borda.add(filho);
                     this.expandidos.add(filho.getEstado());
                     ordenarBordaPorHeuristica(borda);
@@ -184,16 +184,6 @@ public class Busca {
         }
 
         return null;
-    }
-
-    // Analisa se a borda já contém um estado
-    private boolean contemEstado(List<No> borda, String estado) {
-        for (No no : borda) {
-            if (no.getEstado().equals(estado)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     // Ordenar a borda pelo custo
