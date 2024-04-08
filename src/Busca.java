@@ -24,8 +24,7 @@ public class Busca {
             this.explorados.add(no.getEstado());
 
             if (this.problema.objetivo(no.getEstado())) {
-                no.solucao(explorados);
-                return explorados;
+                return no.solucao(no.caminho());
             }
 
             for (No filho : no.explorar(this.problema)) {
@@ -49,8 +48,7 @@ public class Busca {
             this.explorados.add(no.getEstado());
 
             if (this.problema.objetivo(no.getEstado())) {
-                no.solucao(explorados);
-                return explorados;
+                return no.solucao(no.caminho());
             }
 
             for (No filho : no.explorar(this.problema)) {
@@ -74,8 +72,7 @@ public class Busca {
             this.explorados.add(no.getEstado());
 
             if (this.problema.objetivo(no.getEstado())) {
-                no.solucao(explorados);
-                return explorados;
+                return no.solucao(no.caminho());
             }
 
             if (no.getProfundidade() < limite) {
@@ -116,8 +113,7 @@ public class Busca {
             this.explorados.add(no.getEstado());
 
             if (this.problema.objetivo(no.getEstado())) {
-                no.solucao(explorados);
-                return explorados;
+                return no.solucao(no.caminho());
             }
 
             for (No filho : no.explorar(this.problema)) {
@@ -143,8 +139,7 @@ public class Busca {
             this.explorados.add(no.getEstado());
 
             if (this.problema.objetivo(no.getEstado())) {
-                no.solucao(explorados);
-                return explorados;
+                return no.solucao(no.caminho());
             }
 
             for (No filho : no.explorar(this.problema)) {

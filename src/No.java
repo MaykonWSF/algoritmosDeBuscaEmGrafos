@@ -43,13 +43,12 @@ public class No {
     }
 
     //Retorna uma lista de ações que levam do estado inicial até este nó
-    public List<String> solucao(List<String> explorados) {
-        List<String> acoes = new ArrayList<>();
-        List<String> caminho = explorados;
-        for (int i = 1; i < caminho.size(); i++) {
-            acoes.add(caminho.get(i));
+    public List<String> solucao(List<No> caminho) {
+        List<String> solucao = new ArrayList<>();
+        for (No no : caminho) {
+            solucao.add(no.getEstado());
         }
-        return acoes;
+        return solucao;
     }
     
     //Retorna a profundidade do nó
