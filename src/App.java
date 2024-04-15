@@ -4,6 +4,6 @@ public class App {
         Busca busca1 = new Busca(problema1);
 
         System.out.println("\n");
-        System.out.println(busca1.buscaAEstrela());
+        System.out.println(busca1.buscaDeCustoUniforme());
     }
 }

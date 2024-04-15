@@ -109,7 +109,6 @@ public class Busca {
 
         while (!borda.isEmpty()) {
             No no = borda.remove(0);
-            borda.clear();
             this.explorados.add(no.getEstado());
 
             if (this.problema.objetivo(no.getEstado())) {
@@ -118,6 +117,7 @@ public class Busca {
 
             for (No filho : no.explorar(this.problema)) {
                 if (!this.explorados.contains(filho.getEstado())) {
+                    filho.setCusto(no.getCusto() + filho.getCusto());
                     borda.add(filho);
                     this.expandidos.add(filho.getEstado());
                     ordenarBordaPorCusto(borda);
